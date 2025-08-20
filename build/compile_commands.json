@@ -1,8 +1,0 @@
-[
-{
-  "directory": "/home/benl/dev/minis/bwn/build",
-  "command": "/usr/bin/c++  -I/home/benl/dev/minis/bwn/src -std=gnu++20 -o CMakeFiles/bwn.dir/src/main.cpp.o -c /home/benl/dev/minis/bwn/src/main.cpp",
-  "file": "/home/benl/dev/minis/bwn/src/main.cpp",
-  "output": "CMakeFiles/bwn.dir/src/main.cpp.o"
-}
-]

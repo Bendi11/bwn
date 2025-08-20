@@ -1,3 +1,0 @@
-/home/benl/dev/minis/bwn/build/CMakeFiles/bwn.dir
-/home/benl/dev/minis/bwn/build/CMakeFiles/edit_cache.dir
-/home/benl/dev/minis/bwn/build/CMakeFiles/rebuild_cache.dir
