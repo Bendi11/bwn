@@ -1,4 +1,5 @@
 #include "pll.hpp"
+#include "qam.hpp"
 #include <cmath>
 #include <cstdio>
 #include <iostream>
@@ -11,10 +12,6 @@
 
 static inline constexpr size_t SAMPLE_RATE = 44100;
 
-template<float FREQ>
-static inline float cosine(int sample) {
-    return std::cos(2.f*std::numbers::pi * (float)sample * (FREQ / (float)SAMPLE_RATE));
-}
 
 int main(int argc, char *argv[]) {
     auto audio_spec = pa_sample_spec {
@@ -44,12 +41,15 @@ int main(int argc, char *argv[]) {
     }
 
     auto pll = dpll<44100.f>();
+    auto qam = qam_output<44100.f, 512.f>();
+    auto demod = qam_demod<44100.f>();
 
-    float buf[88200];
-    for(int i = 0; i < 88200; ++i) {
-        buf[i] = pll.sample(cosine<300.5f>(i));
-        if(i % 1000 == 0) std::cout << "Frequency is " << pll.get_frequency() << std::endl;
-    }
+    float buf[44100];
+    qam.pilot_tone(buf);
+    demod.lock(buf);
+
+    qam.tone(3, buf);
+    demod.decode(buf);
 
     pa_simple_write(pa_inst, buf, sizeof(buf), &ec);
     if(ec != PA_OK) {

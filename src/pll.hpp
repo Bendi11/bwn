@@ -31,6 +31,8 @@ public:
         return osc_sample;
     }
 
+    inline constexpr float osc() { return _osc.sample(); }
+
 private:
     float _prev_err = 0.f;
     zero_cross<SAMPLE_F> _input;
